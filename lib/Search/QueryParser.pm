@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use locale;
 
-our $VERSION = "0.91";
+our $VERSION = "0.92";
 
 =head1 NAME
 
@@ -106,9 +106,15 @@ negation of above
 
 classical relational operators
 
+=item C<#>
+
+Inclusion in the set of comma-separated integers supplied
+on the right-hand side. 
+
+
 =back
 
-Operators C<:>, C<~>, C<=~> and C<!~> admit an empty 
+Operators C<:>, C<~>, C<=~>, C<!~> and C<#> admit an empty 
 left operand (so the field name will be C<''>).
 Search engines will usually interpret this as 
 "any field" or "the whole data record".
@@ -180,8 +186,8 @@ use constant DEFAULT => {
   rxTerm      => qr/[^\s()]+/,
   rxField     => qr/\w+/,
 
-  rxOp        => qr/==|<=|>=|!=|=~|!~|:|=|<|>|~/, # longest ops first !
-  rxOpNoField => qr/=~|!~|~|:/, # ops that admit an empty left operand
+  rxOp        => qr/==|<=|>=|!=|=~|!~|[:=<>~#]/, # longest ops first !
+  rxOpNoField => qr/=~|!~|[~:#]/, # ops that admit an empty left operand
 
   rxAnd       => qr/AND|ET|UND|E/,
   rxOr        => qr/OR|OU|ODER|O/,

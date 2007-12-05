@@ -1,7 +1,7 @@
 Revision history for Perl extension Search::QueryParser.
 
-0.92 01.12.2007
-  - added '#' operator (for matching against Bit::Vector)        
+0.92 04.12.2007
+  - added '#' operator (for matching against sets of integers)        
 
 0.91 25.05.2005 
   - quoted "exact phrases" are no longer parsed as arrays (was not

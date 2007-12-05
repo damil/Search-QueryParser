@@ -24,6 +24,10 @@ suitable for external search engines
   # boolean operators (example below is equivalent to "+a +(b c) -d")
   $query = $qp->parse("a AND (b OR c) AND NOT d");
 
+  # subset of rows
+  $query = $qp->parse("Id#123,444,555,666 AND (b OR c)");
+
+
 =head1 DESCRIPTION
 
 This module parses a query string into a data structure to be handled
@@ -375,13 +379,6 @@ LOOP :
       if (s/^(")([^"]*?)"\s*// or 
 	  s/^(')([^']*?)'\s*//) { # parse a quoted string. 
 	my ($quote, $val) = ($1, $2);
-
-# Dropped 25.05.2005
-# 	if ($op eq ':') {
-# 	  my @lst = ($val =~ /$self->{rxTerm}/g); # split into a list of terms
-# 	  $val = (@lst > 1) ? \@lst : (@lst > 0) ? $lst[0] : '';
-# 	}
-
 	$subQ = {field=>$field, op=>$op, value=>$val, quote=>$quote};
       }
       elsif (s/^\(\s*//) { # parse parentheses 
@@ -477,7 +474,7 @@ Laurent Dami, E<lt>laurent.dami AT etat ge chE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2005 by Laurent Dami.
+Copyright (C) 2005, 2007 by Laurent Dami.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself. 

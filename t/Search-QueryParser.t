@@ -73,5 +73,10 @@ is($qp->unparse($q),
    '(domain:example.org domain:example.com)',
    "explicit field within parenthesis");
 
+
+$q = $qp->parse("foo bar )and garbage");
+ok(!$q, 'parse error');
+like($qp->err, qr/unable to parse/, 'could not parse entire query');
+
 done_testing;
 

@@ -343,7 +343,19 @@ method L<err> can be called to get an explanatory message.
 
 
 
-sub parse { return (_parse(@_))[0]; } # just return 1st result from _parse
+sub parse {
+  my $self = shift;
+  my $s_orig = $_[0];
+  my ($parsedQuery, $restOfString) = $self->_parse(@_);
+  if ($restOfString) {
+    $self->{err} ||= "[$s_orig] : parsed into " . $self->unparse($parsedQuery)
+                   . ", but unable to parse [$restOfString]";
+    return undef;
+  }
+
+  return $parsedQuery;
+}
+
 
 sub _parse{ # returns ($parsedQuery, $restOfString)
   my ($self, $s, $implicitPlus, $parentField, $parentOp) = @_; # last 2 args only for recursive calls

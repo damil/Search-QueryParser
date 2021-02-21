@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use locale;
 
-our $VERSION = "0.94";
+our $VERSION = "0.95";
 
 =head1 NAME
 
